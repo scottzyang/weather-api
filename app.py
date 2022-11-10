@@ -5,7 +5,7 @@ from pprint import PrettyPrinter
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, send_file
-from geopy.geocoders import Nominatim
+# from geopy.geocoders import Nominatim
 
 
 ################################################################################
@@ -45,8 +45,8 @@ def results():
     """Displays results for current weather conditions."""
     # TODO: Use 'request.args' to retrieve the city & units from the query
     # parameters.
-    city = ''
-    units = ''
+    city = request.args.get('city')
+    units = request.args.get('units')
 
     params = {
         # TODO: Enter query parameters here for the 'appid' (your api key),
