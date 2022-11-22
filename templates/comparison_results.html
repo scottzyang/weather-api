@@ -45,9 +45,12 @@
     </p>
 
     <p>
-        The sun sets in {{city1['city']}} [HOURS] hours [EARLIER/LATER] than in {{city2['city']}}.
+        The sun sets in {{city1['city']}} at {{city1['sunset'].strftime('%H:%M')}}. In {{city2['city']}} the sun sets
+        at {{city2['sunset'].strftime('%H:%M')}}.
     </p>
-
+    <p>
+        With a difference of {{hours_diff['delta']}} minutes.
+    </p>
 </section>
 
 {% endblock %}
