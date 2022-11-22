@@ -2,34 +2,55 @@
 {% block content %}
 
 <section class="weather-form">
-    {# 
-        TODO: Replace the hard-coded cities and date below with data from the 
-        server.
+    {#
+    TODO: Replace the hard-coded cities and date below with data from the
+    server.
     #}
-    <h1>Weather in [CITY1] and [CITY2]</h1>
-    <p>[TODAYS_DATE]</p>
+    <h1>Weather in {{city1['city']}} and {{city2['city']}}</h1>
+    <p>{{date.strftime('%m/%d/%Y')}}</p>
 
 
     {#
-        TODO: Add the temperature, description, and min & max temperature below.
-        Replace 'F' with the appropriate units.
+    TODO: Add the temperature, description, and min & max temperature below.
+    Replace 'F' with the appropriate units.
     #}
     <p>
-        It is [NUM_DEGREES] [UNITS] [WARMER/COLDER] in [CITY1] than in [CITY2] today.
+        It is {{temp_diff['delta']}} {{units}}
+        {% if temp_diff['is_warmer'] == True %}
+        warmer
+        {% else %}
+        colder
+        {% endif %}
+        in {{city1['city']}} than in {{city2['city']}} today.
     </p>
 
     <p>
-        The humidity in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
+        The humidity in {{city1['city']}} is {{humid_diff['delta']}}%
+        {% if humid_diff['is_humid'] %}
+        greater
+        {% else %}
+        less
+        {% endif %}
+        than {{city2['city']}}.
     </p>
 
     <p>
-        The wind speed in [CITY1] is [AMOUNT] [GREATER/LESS] than in [CITY2].
+        The wind speed in {{city1['city']}} is {{wind_diff['delta']}} miles/hour
+        {% if wind_diff['is_windy'] %}
+        greater
+        {% else %}
+        less
+        {% endif %}
+        than {{city2['city']}}.
     </p>
 
     <p>
-        The sun sets in [CITY1] [HOURS] hours [EARLIER/LATER] than in [CITY2].
+        The sun sets in {{city1['city']}} at {{city1['sunset'].strftime('%H:%M')}}. In {{city2['city']}} the sun sets
+        at {{city2['sunset'].strftime('%H:%M')}}.
     </p>
-    
+    <p>
+        With a difference of {{hours_diff['delta']}} minutes.
+    </p>
 </section>
 
 {% endblock %}
