@@ -105,22 +105,32 @@ def comparison_results():
 
     city1_response = city_result(city1)
     city2_response = city_result(city2)
+    
+    # function to determine 
+    def greater_or_less(city1_stats, city2_stats):
+        if city1_stats > city2_stats:
+            return True
+        return
+    
+    # function to determine differences
+    def weather_difference(city1_stats, city2_stats):
+        weather_diff = round(abs(city1_stats - city2_stats))
+        return weather_diff
+
+    # initialize values to False
     is_warmer = False
     is_humid = False
     is_windy = False
-    # differences
-    if city1_response['main']['temp'] > city2_response['main']['temp']:
-        is_warmer = True
-    
-    if city1_response['main']['humidity'] > city2_response['main']['humidity']:
-        is_humid = True
 
-    if city1_response['wind']['speed'] > city2_response['wind']['speed']:
-        is_windy = True
+    # call function to determine if values should be true based on city weather info
+    is_warmer = greater_or_less(city1_response['main']['temp'], city2_response['main']['temp'])
+    is_humid = greater_or_less(city1_response['main']['humidity'], city2_response['main']['humidity'])
+    is_windy = greater_or_less(city1_response['wind']['speed'], city2_response['wind']['speed'])
 
-    temp_diff = round(abs(city2_response['main']['temp'] - city1_response['main']['temp']))
-    humid_diff = round(abs(city1_response['main']['humidity'] - city2_response['main']['humidity']))
-    wind_diff = round(abs(city1_response['wind']['speed'] - city2_response['wind']['speed']))
+    # call function to determine the weather differences
+    temp_diff = weather_difference(city1_response['main']['temp'], city2_response['main']['temp'])
+    humid_diff = weather_difference(city1_response['main']['humidity'], city2_response['main']['humidity'])
+    wind_diff = weather_difference(city1_response['wind']['speed'], city2_response['wind']['speed'])
 
     # TODO: Pass the information for both cities in the context. Make sure to
     # pass info for the temperature, humidity, wind speed, and sunset time!
