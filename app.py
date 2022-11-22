@@ -132,11 +132,18 @@ def comparison_results():
     humid_diff = weather_difference(city1_response['main']['humidity'], city2_response['main']['humidity'])
     wind_diff = weather_difference(city1_response['wind']['speed'], city2_response['wind']['speed'])
 
+    # calculate sun set difference
+    datetime_diff = datetime.fromtimestamp(city1_response['sys']['sunset']) - datetime.fromtimestamp(city2_response['sys']['sunset'])
+    hours_diff = round(datetime_diff.total_seconds() / 60)
+
     # TODO: Pass the information for both cities in the context. Make sure to
     # pass info for the temperature, humidity, wind speed, and sunset time!
     # HINT: It may be useful to create 2 new dictionaries, `city1_info` and 
     # `city2_info`, to organize the data.
     context = {
+        'hours_diff': {
+            'delta': hours_diff,
+            },
         'temp_diff': {
             'delta': temp_diff,
             'is_warmer': is_warmer
